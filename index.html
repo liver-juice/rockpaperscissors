@@ -6,9 +6,50 @@
         <title>Document</title>
     </head>
     <body>
-        
+        <h1> OPEN DA CONSOLE MF. </h1>
         <script>
-            console.log('Hello World');
+            //generate random choice for the computer
+                //how? generate random num between 1 and 3. assign to choice depending on value
+            //gather choice input from the user
+            //if user beats computer:
+                // log "user wins!"
+            //else if computer beats user:
+                // log "computer wins!"
+            //else:
+                // it must be a tie
+
+                
+                function getComputerChoice(){
+                    num = Math.ceil(Math.random() * 3)
+                    if (num === 1){
+                        return 'rock';
+                    }
+                    else if (num === 2){
+                        return 'paper';
+                    }
+                    else {
+                        return 'scissors';
+                    }
+                }
+                
+                function getHumanChoice(){
+                    let choice = prompt('CHOOSE WISELY WARRIOR. ROCK... PAPER... SCISSORS..');
+                    return choice;
+                }
+
+                let humanScore = 0;
+                let computerScore = 0;
+
+                function playRound(humanChoice, computerChoice){
+                    console.log(humanChoice);
+
+                }
+
+                const humanSelection = getHumanChoice();
+                const computerSelection = getComputerChoice();
+
+                playRound(humanSelection.toLowerCase(), computerSelection);
+
         </script>
     </body>
     </html>
