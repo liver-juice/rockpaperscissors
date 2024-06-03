@@ -40,41 +40,42 @@
                     }
                 }
                 
-                function getHumanChoice(){
-                    let choice = prompt('CHOOSE WISELY WARRIOR. ROCK... PAPER... SCISSORS..');
-                    return choice;
+                
+                function playRound(humanChoice, computerChoice=getComputerChoice()){
+                    if (humanChoice === 'rock' && computerChoice === 'paper' || humanChoice === 'paper' && computerChoice === 'scissors' || humanChoice === 'scissors' && computerChoice === 'rock'){
+                        console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+                    }
+                    else if (computerChoice === 'rock' && humanChoice === 'paper' || computerChoice === 'paper' && humanChoice === 'scissors' || computerChoice === 'scissors' && humanChoice === 'rock'){
+                        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+                    }
+                    else if (humanChoice === computerChoice){
+                        console.log(`Its a draw, ${humanChoice} on ${computerChoice}.`);
+                    }
+                    else {
+                        console.log('RED ALERT, DANGER! INVALID RESPONSE.');
+                    }
                 }
 
+                // reference the three buttons
+
+                let rock = document.querySelector(".rock");
+                let paper = document.querySelector(".paper");
+                let scissors = document.querySelector(".scissors");
+                // event listeners call the game function with the appropriate parameter
+                rock.addEventListener("click", () => {
+                    playRound('rock');
+                });
+                paper.addEventListener("click", () => {
+                    playRound('paper');
+                })
+                scissors.addEventListener("click", () => {
+                    playRound('scissors');
+                })
 
 
-
-                function playGame(){
-                    let humanScore = 0;
-                    let computerScore = 0;
 
                 
-                    function playRound(humanChoice, computerChoice){
-                        if (humanChoice === 'rock' && computerChoice === 'paper' || humanChoice === 'paper' && computerChoice === 'scissors' || humanChoice === 'scissors' && computerChoice === 'rock'){
-                            console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
-                            return computerScore += 1;
-                        }
-                        else if (computerChoice === 'rock' && humanChoice === 'paper' || computerChoice === 'paper' && humanChoice === 'scissors' || computerChoice === 'scissors' && humanChoice === 'rock'){
-                            console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-                            return humanScore += 1;
-                        }
-                        else if (humanChoice === computerChoice){
-                            console.log('Its a draw');
-                        }
-                        else {
-                            console.log('RED ALERT, DANGER! INVALID RESPONSE.');
-                        }
-                    }
 
-
-
-                }
-
-                playGame()
         </script>
     </body>
     </html>
