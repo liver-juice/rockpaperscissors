@@ -3,15 +3,45 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <link rel="stylesheet" href="styles.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+        <title>Rock Paper Scissors</title>
     </head>
     <body>
-        <div class="choices">
-            <button class="rock">Rock</button>
-            <button class="paper">Paper</button>
-            <button class="scissors">Scissors</button>
+        <div class="screen">
+            <div class="result">
+                Rock Paper Scissors! First to 5
+            </div>
+
+            <div class="choices">
+                <button class="rock">Rock</button>
+                <button class="paper">Paper</button>
+                <button class="scissors">Scissors</button>
+            </div>
         </div>
 
+        <div class="scores">
+            <div class="label">
+                Scores
+            </div>
+            
+            <div class="scoreflexdiv">
+                <div class="userscore">
+                    <p class="scoreheader">User</p>
+                    <p id="playerscore">0</p>
+                </div>
+
+                <div class="computerscore">
+                    <p class="scoreheader">Computer</p>
+                    <p id="cpuscore">0</p>
+                </div>
+            </div>
+            
+        </div>
 
 
 
@@ -26,6 +56,14 @@
             //else:
                 // it must be a tie
 
+
+                let resultDisplay = document.querySelector(".result");
+                let playerScoreElement = document.querySelector("#playerscore");
+                let cpuScoreElement = document.querySelector("#cpuscore");
+
+
+                let playerScore = 0;
+                let computerScore = 0;
                 
                 function getComputerChoice(){
                     num = Math.ceil(Math.random() * 3)
@@ -39,20 +77,46 @@
                         return 'scissors';
                     }
                 }
+
+                function calculateScore(winner){
+                    if (winner === 'player'){
+                        playerScore += 1;
+                        playerScoreElement.textContent = playerScore;
+                    } else if (winner === 'cpu'){
+                        computerScore += 1;
+                        cpuScoreElement.textContent = computerScore;
+                    }
+                    checkForWinner();
+                }
+                
+                function checkForWinner(){
+                    if (playerScore >= 5){
+                        resultDisplay.textContent = 'You won!';
+                        playerScoreElement.textContent = 0;
+                        cpuScoreElement.textContent = 0;
+                    }
+                    else if (computerScore >= 5){
+                        resultDisplay.textContent = 'You lost!';
+                        playerScoreElement.textContent = 0;
+                        cpuScoreElement.textContent = 0;
+                    }
+                }
                 
                 
                 function playRound(humanChoice, computerChoice=getComputerChoice()){
                     if (humanChoice === 'rock' && computerChoice === 'paper' || humanChoice === 'paper' && computerChoice === 'scissors' || humanChoice === 'scissors' && computerChoice === 'rock'){
-                        console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+                        resultDisplay.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
+                        calculateScore('cpu');
                     }
                     else if (computerChoice === 'rock' && humanChoice === 'paper' || computerChoice === 'paper' && humanChoice === 'scissors' || computerChoice === 'scissors' && humanChoice === 'rock'){
-                        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+                        resultDisplay.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
+                        calculateScore('player');
                     }
                     else if (humanChoice === computerChoice){
-                        console.log(`Its a draw, ${humanChoice} on ${computerChoice}.`);
+                        resultDisplay.textContent = `Its a draw, ${humanChoice} on ${computerChoice}.`;
                     }
                     else {
-                        console.log('RED ALERT, DANGER! INVALID RESPONSE.');
+                        resultDisplay.textContent = 'RED ALERT, DANGER! INVALID RESPONSE.';
                     }
                 }
 
